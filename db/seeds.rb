@@ -5,3 +5,17 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+puts "Creating users..."
+user1 = {
+  email: "admin@admin.com",
+  password: "adminadmin",
+  first_name: "Admin",
+  last_name: "Adminton"
+}
+[user1].each do |attributes|
+  user = User.create!(attributes)
+  puts "\tCreated #{user.first_name} with email: #{user.email}"
+end
+puts "Finished users!"
+puts "\n"
