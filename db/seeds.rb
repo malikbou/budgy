@@ -39,7 +39,7 @@ lisbon = {user_id: user_id,
   people: 5,
   start_date: "2023-01-01",
   end_date: "2023-01-30",
-  budget: false,
+  budget: 1550,
   currency: 'EUR'}
 madrid = {user_id: user_id,
   name: "Madrid",
@@ -48,7 +48,7 @@ madrid = {user_id: user_id,
   people: 8,
   start_date: "2023-02-14",
   end_date: "2023-02-25",
-  budget: false,
+  budget: 1280,
   currency: 'EUR'}
 
 [lisbon, madrid].each do |attributes|
