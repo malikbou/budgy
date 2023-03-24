@@ -14,7 +14,13 @@ user1 = {
   first_name: "Admin",
   last_name: "Adminton"
 }
-[user1].each do |attributes|
+user2 = {
+  email: "malik@bouaoudia.com",
+  password: "malikmalik",
+  first_name: "Malik",
+  last_name: "Bouaoudia"
+}
+[user1, user2].each do |attributes|
   user = User.create!(attributes)
   puts "\tCreated #{user.first_name} with email: #{user.email}"
 end
