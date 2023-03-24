@@ -1,0 +1,13 @@
+<div class="container sm">
+  <%= simple_form_for(event) do |f| %>
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%= f.input :category %>
+    <%= f.input :people %>
+    <%= f.input :start_date %>
+    <%= f.input :end_date %>
+    <%= f.input :budget %>
+    <%= f.input :currency %>
+    <%= f.submit class: "btn-primary" %>
+  <% end %>
+</div>
