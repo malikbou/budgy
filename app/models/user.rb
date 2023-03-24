@@ -4,4 +4,5 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   validates :email, format: { with: /\A.*@.*\.com\z/ }
+  has_many :events
 end
