@@ -1,0 +1,12 @@
+<h2><%= @event.name %></h2>
+<p><%= @event.description %></p>
+<p><%= @event.people %></p>
+<p><%= @event.start_date %></p>
+<p><%= @event.end_date %></p>
+<p><%= @event.budget %></p>
+<p><%= @event.currency %></p>
+
+<%= link_to "Back to My Events", my_events_path, class: "btn btn-primary" %>
+<%= link_to "Edit Event", edit_event_path(@event), class: "btn btn-secondary" %>
+<%= link_to "Delete", event_path(@event),
+  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
