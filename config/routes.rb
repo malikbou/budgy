@@ -10,4 +10,8 @@ Rails.application.routes.draw do
   get "events/:id", to: "events#show", as: :event
 
   post "events", to: "events#create"
+
+  get "events/:id/edit", to: "events#edit"
+  patch "events/:id", to: "events#update"
+
 end
