@@ -3,7 +3,6 @@
   <h1><%= "Hello #{current_user.first_name}!" %></h1>
   </div>
 
-
   <div class="container-sm">
   <h3>Your Trips</h3>
     <% @events.each do |event| %>
@@ -21,4 +20,5 @@
         </div>
       <% end %>
     <% end %>
+  <%= link_to "Create Event", events_new_path, class: "btn btn-primary" %>
 </div>

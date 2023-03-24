@@ -12,9 +12,13 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new(params[:event])
-    @event.save
-    redirect_to event_path(@event)
+    @event = Event.new(event_params)
+    @event.user_id = current_user.id
+    if @event.save
+      redirect_to event_path(@event)
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def edit
@@ -27,9 +31,16 @@ class EventsController < ApplicationController
     redirect_to event_path(@event)
   end
 
+  def destroy
+    @event = Event.find(params[:id])
+    @event.destroy
+    redirect_to my_events_path, status: :see_other
+  end
+
   private
 
   def event_params
-    params.require(:event).permit(:name, :category, :people)
+    params.require(:event).permit(:name, :description, :category, :people,
+      :start_date, :end_date, :budget, :currency)
   end
 end
