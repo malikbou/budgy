@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :events, only: [:show, :new, :create, :edit, :update, :destroy] do
     resources :budgets, only: [:new, :create, :edit, :update, :show, :destroy]
+    resources :expenses, only: [:new, :create, :edit, :update, :show, :destroy]
   end
   get "my_events", to: "events#my_events", as: :my_events
 

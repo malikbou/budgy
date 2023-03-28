@@ -16,7 +16,7 @@
     data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
 </div>
 
-<div class="container">
+<div class="container sm mb-5">
   <h3><strong>Budget</strong></h3>
   <% if @event.budgets.empty? %>
     <%= link_to "Create Budget", new_event_budget_path(@event), class: "btn btn-primary" %>
@@ -38,4 +38,21 @@
       data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
     <% end %>
   <% end %>
+</div>
+
+<div class="container sm mb-5">
+  <h3><strong>Expenses</strong></h3>
+  <%= "Total: #{@event.expenses.sum(:amount)}" %>
+  <%= link_to "Add Expense", new_event_expense_path(@event), class: "btn btn-primary" %>
+      <ul class="list-group">
+        <% @event.expenses.each do |expense| %>
+          <li class="list-group-item"> Description: <%= expense.description %></li>
+          <li class="list-group-item"> Participants: <%= expense.participants %></li>
+          <li class="list-group-item"> Amount: <%= expense.amount %></li>
+          <li class="list-group-item"> Category: <%= expense.category %></li>
+      </ul>
+        <%= link_to "Edit Expense", edit_event_expense_path(@event, expense), class: "btn btn-secondary" %>
+        <%= link_to "Delete", event_expense_path(@event, expense),
+        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
+    <% end %>
 </div>
