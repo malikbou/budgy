@@ -1,0 +1,2 @@
+class EventBudgetsController < ApplicationController
+end
