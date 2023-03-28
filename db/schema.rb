@@ -10,13 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_24_161733) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_28_134418) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "event_budgets", force: :cascade do |t|
+  create_table "budgets", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "events_id", null: false
     t.float "flights"
     t.float "transport"
     t.float "eating_out"
@@ -27,8 +26,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_24_161733) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "accommodation"
-    t.index ["events_id"], name: "index_event_budgets_on_events_id"
-    t.index ["user_id"], name: "index_event_budgets_on_user_id"
+    t.bigint "event_id"
+    t.index ["event_id"], name: "index_budgets_on_event_id"
+    t.index ["user_id"], name: "index_budgets_on_user_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -60,7 +60,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_24_161733) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "event_budgets", "events", column: "events_id"
-  add_foreign_key "event_budgets", "users"
+  add_foreign_key "budgets", "users"
   add_foreign_key "events", "users"
 end

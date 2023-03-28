@@ -10,3 +10,12 @@
 <%= link_to "Edit Event", edit_event_path(@event), class: "btn btn-secondary" %>
 <%= link_to "Delete", event_path(@event),
   data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
+
+
+<p><strong>Budget</strong></p>
+<ul class="list-group">
+  <% @event.eventbudgets.each do |budget| %>
+    <li class="list-group-item">flights: <%= budget.flights %></li>
+  <% end %>
+</ul>
+<br>

@@ -1,0 +1,12 @@
+<h1>New budget</h1>
+<%= simple_form_for [@event, @eventbudget] do |f| %>
+  <%= f.input :flights %>
+  <%= f.input :transport %>
+  <%= f.input :accommodation %>
+  <%= f.input :eating_out %>
+  <%= f.input :entertainment %>
+  <%= f.input :activities %>
+  <%= f.input :shopping %>
+  <%= f.input :emergency %>
+  <%= f.submit "Submit budget", class: "btn btn-primary" %>
+<% end %>
