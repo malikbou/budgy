@@ -14,28 +14,28 @@
   <%= link_to "Edit Event", edit_event_path(@event), class: "btn btn-secondary" %>
   <%= link_to "Delete", event_path(@event),
     data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
-  <% if @event.budgets.empty? %>
-    <%= link_to "Create Budget", new_event_budget_path(@event), class: "btn btn-primary" %>
-  <% end %>
 </div>
 
 <div class="container">
   <h3><strong>Budget</strong></h3>
-  <ul class="list-group">
-    <% @event.budgets.each do |budget| %>
-      <li class="list-group-item"> <%= "✈️ Flights: #{budget.flights}" %></li>
-      <li class="list-group-item"> Transport: <%= budget.transport %></li>
-      <li class="list-group-item"> Accommodation: <%= budget.accommodation %></li>
-      <li class="list-group-item"> Eating Out: <%= budget.eating_out %></li>
-      <li class="list-group-item"> Entertainment: <%= budget.entertainment %></li>
-      <li class="list-group-item"> Activities: <%= budget.activities %></li>
-      <li class="list-group-item"> Shopping: <%= budget.shopping %></li>
-      <li class="list-group-item"> Emergency: <%= budget.emergency %></li>
-
-  </ul>
-  <br>
-    <%= link_to "Edit Budget", edit_event_budget_path(@event), class: "btn btn-secondary" %>
-    <%= link_to "Delete", event_budget_path(budget),
-    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
+  <% if @event.budgets.empty? %>
+    <%= link_to "Create Budget", new_event_budget_path(@event), class: "btn btn-primary" %>
+  <% else %>
+    <ul class="list-group">
+      <% @event.budgets.each do |budget| %>
+        <li class="list-group-item"> 🛩️  Flights: <%= budget.flights %></li>
+        <li class="list-group-item"> Transport: <%= budget.transport %></li>
+        <li class="list-group-item"> Accommodation: <%= budget.accommodation %></li>
+        <li class="list-group-item"> Eating Out: <%= budget.eating_out %></li>
+        <li class="list-group-item"> Entertainment: <%= budget.entertainment %></li>
+        <li class="list-group-item"> Activities: <%= budget.activities %></li>
+        <li class="list-group-item"> Shopping: <%= budget.shopping %></li>
+        <li class="list-group-item"> Emergency: <%= budget.emergency %></li>
+    </ul>
+    <br>
+      <%= link_to "Edit Budget", edit_event_budget_path(@event, budget), class: "btn btn-secondary" %>
+      <%= link_to "Delete", event_budget_path(@event, budget),
+      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
+    <% end %>
   <% end %>
 </div>

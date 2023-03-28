@@ -1,10 +1,10 @@
 <div class="container-sm">
   <div class="container-sm mb-5">
-  <h1><%= "Hello #{current_user.first_name}!" %></h1>
+  <h2><strong><%= "Hello #{current_user.first_name}!" %></strong></h2>
   </div>
 
   <div class="container-sm">
-  <h3>Your Trips</h3>
+  <h3><strong>Your Trips</strong></h3>
     <% @events.each do |event| %>
       <%= link_to event_path(event), class: "link" do %>
         <div class="card-trip mt-2 mb-3">
