@@ -1,0 +1,9 @@
+<div class="container sm">
+  <%= simple_form_for [event, expense] do |f| %>
+    <%= f.input :description %>
+    <%= f.input :participants %>
+    <%= f.input :amount %>
+    <%= f.input :category %>
+    <%= f.submit "Submit budget", class: "btn btn-primary" %>
+  <% end %>
+</div>
