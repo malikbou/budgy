@@ -42,7 +42,8 @@
 
 <div class="container sm mb-5">
   <h3><strong>Expenses</strong></h3>
-    <%= link_to "Add Expense", new_event_expense_path(@event), class: "btn btn-primary" %>
+  <%= "Total: #{@event.expenses.sum(:amount)}" %>
+  <%= link_to "Add Expense", new_event_expense_path(@event), class: "btn btn-primary" %>
       <ul class="list-group">
         <% @event.expenses.each do |expense| %>
           <li class="list-group-item"> Description: <%= expense.description %></li>
