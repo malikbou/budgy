@@ -27,9 +27,10 @@ end
 puts "Finished users!"
 puts "\n"
 
-puts "checking something"
+puts "Finding first user ID..."
 user_id = User.first.id
-puts "ID retrieved: #{user_id}"
+puts "First user ID is #{user_id}"
+puts "\n"
 
 puts "Creating events..."
 lisbon = {user_id: user_id,
@@ -39,7 +40,7 @@ lisbon = {user_id: user_id,
   people: 5,
   start_date: "2023-01-01",
   end_date: "2023-01-30",
-  budget: false,
+  budget: 1550,
   currency: 'EUR'}
 madrid = {user_id: user_id,
   name: "Madrid",
@@ -48,11 +49,34 @@ madrid = {user_id: user_id,
   people: 8,
   start_date: "2023-02-14",
   end_date: "2023-02-25",
-  budget: false,
+  budget: 1280,
   currency: 'EUR'}
 
 [lisbon, madrid].each do |attributes|
   event = Event.create!(attributes)
   puts "Created #{event.name}"
 end
-puts "Finished!"
+puts "Finished creating events!"
+puts "\n"
+
+puts "Finding first event ID..."
+event_id = Event.first.id
+puts "First event ID is #{event_id}"
+puts "\n"
+
+puts "Creating budgets..."
+lisbon_budget = {user_id: user_id,
+  event_id: event_id,
+  flights: 550,
+  accommodation: 400,
+  transport: 150,
+  eating_out: 200,
+  entertainment: 250,
+  activities: 100,
+  shopping: 280,
+  emergency: 100}
+[lisbon_budget].each do |attributes|
+  budget = Budget.create!(attributes)
+  puts "Created Budget for #{budget.event.name}"
+end
+puts "Finished creating budgets!"
