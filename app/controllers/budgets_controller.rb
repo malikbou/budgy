@@ -1,5 +1,5 @@
 class BudgetsController < ApplicationController
-  before_action :set_event, only: %i[new create edit]
+  before_action :set_event, only: %i[new create edit destroy]
 
   def new
     # @event = Event.find(params[:event_id])
@@ -25,6 +25,12 @@ class BudgetsController < ApplicationController
     @budget = Budget.find(params[:id])
     @budget.update(budget_params)
     redirect_to event_path(@event)
+  end
+
+  def destroy
+    @budget = Budget.find(params[:id])
+    @budget.destroy
+    redirect_to event_path(@budget.event), status: :see_other
   end
 
   private

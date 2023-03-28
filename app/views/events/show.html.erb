@@ -30,8 +30,11 @@
       <li class="list-group-item"> Activities: <%= budget.activities %></li>
       <li class="list-group-item"> Shopping: <%= budget.shopping %></li>
       <li class="list-group-item"> Emergency: <%= budget.emergency %></li>
-    <% end %>
+
   </ul>
   <br>
     <%= link_to "Edit Budget", edit_event_budget_path(@event), class: "btn btn-secondary" %>
+    <%= link_to "Delete", event_budget_path(budget),
+    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
+  <% end %>
 </div>
