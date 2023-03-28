@@ -9,6 +9,7 @@ class BudgetsController < ApplicationController
   def create
     @budget = Budget.new(budget_params)
     @budget.event = @event
+    @budget.user = current_user
     if @budget.save
       redirect_to event_path(@event)
     else
@@ -23,6 +24,7 @@ class BudgetsController < ApplicationController
   end
 
   def budget_params
-    params.require(:review).permit(:content)
+    params.require(:budget).permit(:flights, :accommodation, :transport,
+    :eating_out, :entertainment, :activities, :shopping, :emergency)
   end
 end
