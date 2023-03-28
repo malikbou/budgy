@@ -1,8 +1,8 @@
 class BudgetsController < ApplicationController
-  before_action :set_event, only: %i[new create]
+  before_action :set_event, only: %i[new create edit]
 
   def new
-    @event = Event.find(params[:event_id])
+    # @event = Event.find(params[:event_id])
     @budget = Budget.new
   end
 
@@ -15,6 +15,16 @@ class BudgetsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def edit
+    @budget = Budget.find(params[:id])
+  end
+
+  def update
+    @budget = Budget.find(params[:id])
+    @budget.update(budget_params)
+    redirect_to event_path(@event)
   end
 
   private
