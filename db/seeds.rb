@@ -80,3 +80,18 @@ lisbon_budget = {user_id: user_id,
   puts "Created Budget for #{budget.event.name}"
 end
 puts "Finished creating budgets!"
+puts "\n"
+
+puts "Adding expenses..."
+lisbon_expenses = {user_id: user_id,
+  event_id: event_id,
+  description: "Fogo de Chao",
+  participants: "Malik",
+  amount: 200,
+  category: "Food"}
+[lisbon_expenses].each do |attributes|
+  expense = Expense.create!(attributes)
+  puts "Added #{expense.amount} at #{expense.description} in #{expense.event.name}"
+end
+puts "Finished adding expenses!"
+puts "\n"

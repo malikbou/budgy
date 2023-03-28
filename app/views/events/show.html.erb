@@ -43,16 +43,15 @@
 <div class="container sm mb-5">
   <h3><strong>Expenses</strong></h3>
     <%= link_to "Add Expense", new_event_expense_path(@event), class: "btn btn-primary" %>
-    <ul class="list-group">
-      <% @event.expenses.each do |expense| %>
-        <li class="list-group-item"> Description: <%= expense.description %></li>
-        <li class="list-group-item"> Participants: <%= budget.participants %></li>
-        <li class="list-group-item"> Amount: <%= budget.amount %></li>
-        <li class="list-group-item"> Category: <%= budget.category %></li>
-    </ul>
-    <br>
-      <%= link_to "Edit Expense", edit_event_expense_path(@event, expense), class: "btn btn-secondary" %>
-      <%= link_to "Delete", event_expense_path(@event, expense),
-      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
+      <ul class="list-group">
+        <% @event.expenses.each do |expense| %>
+          <li class="list-group-item"> Description: <%= expense.description %></li>
+          <li class="list-group-item"> Participants: <%= expense.participants %></li>
+          <li class="list-group-item"> Amount: <%= expense.amount %></li>
+          <li class="list-group-item"> Category: <%= expense.category %></li>
+      </ul>
+        <%= link_to "Edit Expense", edit_event_expense_path(@event, expense), class: "btn btn-secondary" %>
+        <%= link_to "Delete", event_expense_path(@event, expense),
+        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
     <% end %>
 </div>
