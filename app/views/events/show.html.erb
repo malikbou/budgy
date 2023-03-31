@@ -127,3 +127,7 @@
     <% end %>
   </ul>
 </div>
+
+<div id="chart">
+<%= bar_chart @sorted_categories, library: {title: 'Expense Categories', colors: ['#b00', '#0b0', '#00b']} %>
+</div>
