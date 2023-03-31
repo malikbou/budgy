@@ -1,7 +1,7 @@
 <div class="container sm">
   <%= simple_form_for [event, expense] do |f| %>
     <%= f.input :description %>
-    <%= f.input :category, collection: Budget::all_columns, as: :select, prompt: 'Select a Category' %>
+    <%= f.input :category, options_for_select(Budget.all_columns.map(&:reverse)), {}, { class: "form-control" } %>
     <%= f.input :amount %>
     <%= f.input :participants %>
     <%= f.submit "Add expense", class: "btn btn-primary" %>
