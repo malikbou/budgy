@@ -11,8 +11,9 @@ class EventsController < ApplicationController
     if (Date.today >= @event.start_date) && (Date.today <= @event.end_date)
       @days_left = (@event.end_date - Date.today).to_i
     else
-      @days_left = nil
+      @days_left = (@event.end_date - @event.start_date).to_i
     end
+    @daily_budget = (@event.budget / @days_left).round(2)
   end
 
   def new
