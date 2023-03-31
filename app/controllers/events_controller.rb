@@ -15,12 +15,9 @@ class EventsController < ApplicationController
     end
     @daily_budget = (@event.budget / @days_left).round(2)
 
-    # @category_totals = @event.expenses.group(:category).sum(:amount)
-    @category_totals = @event.expenses
-      .group(:category)
-      .select("category, SUM(amount) as total_amount")
-      .order("total_amount DESC")
-
+    # group expenses by categories
+    @category_totals = @event.expenses.group(:category).sum(:amount)
+    @sorted_categories = @category_totals.sort_by { |category, amount| -amount }
   end
 
   def new

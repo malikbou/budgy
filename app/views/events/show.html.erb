@@ -120,11 +120,10 @@
 
 <div class="container sm mb-5">
   <ul>
-    <% @category_totals.each do |key, value| %>
+    <% @sorted_categories.each do |key, value| %>
     <li>
       <%= "#{Budget.human_attribute_name(key)}: #{value}" %>
     </li>
     <% end %>
-    <% raise %>
   </ul>
 </div>
