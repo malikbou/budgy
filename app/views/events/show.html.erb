@@ -1,15 +1,15 @@
 <div class="container sm mb-5">
   <h2><strong><%= @event.name %></strong></h2>
-  <ul class="list-group">
-    <li class="list-group-item"> Description: <%= @event.description %></li>
-    <li class="list-group-item"> Number of People: <%= @event.people %></li>
-    <li class="list-group-item"> Start Date: <%= @event.start_date %></li>
-    <li class="list-group-item"> End Date: <%= @event.end_date %></li>
-    <li class="list-group-item"> Total Budget: <%= @event.budget %></li>
-    <li class="list-group-item"> Currency: <%= @event.currency %></li>
-  </ul>
+  <h4><%= @event.description %></h4>
+  <p><%= "From #{@event.start_date.strftime('%d/%m/%Y')} to #{@event.end_date.strftime('%d/%m/%Y')}" %></p>
+  <h5><%= "💵 Spending $#{@event.expenses.sum(:amount)} over #{@event.currency} #{@event.budget}" %></h5>
+  <h5><%= "⏰ Daily Allowance $XXX over #{@event.currency} #{@event.budget}" %></h5>
+  <% if @days_left.nil? %>
+    <%= "Your trip hasn't started yet" %>
+  <% else %>
+    <%= "You have #{@days_left} days left" %>
+  <% end %>
   <br>
-
   <%= link_to "Back to My Events", my_events_path, class: "btn btn-primary" %>
   <%= link_to "Edit Event", edit_event_path(@event), class: "btn btn-secondary" %>
   <%= link_to "Delete", event_path(@event),
@@ -21,17 +21,57 @@
   <% if @event.budgets.empty? %>
     <%= link_to "Create Budget", new_event_budget_path(@event), class: "btn btn-primary" %>
   <% else %>
-    <ul class="list-group">
-      <% @event.budgets.each do |budget| %>
-        <li class="list-group-item"> 🛩️  Flights: <%= budget.flights %></li>
-        <li class="list-group-item"> Transport: <%= budget.transport %></li>
-        <li class="list-group-item"> Accommodation: <%= budget.accommodation %></li>
-        <li class="list-group-item"> Eating Out: <%= budget.eating_out %></li>
-        <li class="list-group-item"> Entertainment: <%= budget.entertainment %></li>
-        <li class="list-group-item"> Activities: <%= budget.activities %></li>
-        <li class="list-group-item"> Shopping: <%= budget.shopping %></li>
-        <li class="list-group-item"> Emergency: <%= budget.emergency %></li>
-    </ul>
+  <ul class="list-group">
+    <% @event.budgets.each do |budget| %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        🛩️  Flights
+        <span class="badge bg-dark">
+          <%= "#{@event.currency} #{budget.flights}" %>
+        </span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        🚗  Transport
+        <span class="badge bg-dark">
+          <%= "#{@event.currency} #{budget.transport}" %>
+        </span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        🏠  Accomodation
+        <span class="badge bg-dark">
+          <%= "#{@event.currency} #{budget.accommodation}" %>
+        </span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        🍴  Eating Out
+        <span class="badge bg-dark">
+          <%= "#{@event.currency} #{budget.eating_out}" %>
+        </span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        🎭  Entertainment
+        <span class="badge bg-dark">
+          <%= "#{@event.currency} #{budget.entertainment}" %>
+        </span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        🏄‍♂️  Activities
+        <span class="badge bg-dark">
+          <%= "#{@event.currency} #{budget.activities}" %>
+        </span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        🛍️  Shopping
+        <span class="badge bg-dark">
+          <%= "#{@event.currency} #{budget.shopping}" %>
+        </span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        🚨  Emergency
+        <span class="badge bg-dark">
+          <%= "#{@event.currency} #{budget.emergency}" %>
+        </span>
+      </li>
+  </ul>
     <br>
       <%= link_to "Edit Budget", edit_event_budget_path(@event, budget), class: "btn btn-secondary" %>
       <%= link_to "Delete", event_budget_path(@event, budget),
@@ -41,18 +81,25 @@
 </div>
 
 <div class="container sm mb-5">
-  <h3><strong>Expenses</strong></h3>
-  <%= "Total: #{@event.expenses.sum(:amount)}" %>
-  <%= link_to "Add Expense", new_event_expense_path(@event), class: "btn btn-primary" %>
-      <ul class="list-group">
-        <% @event.expenses.each do |expense| %>
-          <li class="list-group-item"> Description: <%= expense.description %></li>
-          <li class="list-group-item"> Participants: <%= expense.participants %></li>
-          <li class="list-group-item"> Amount: <%= expense.amount %></li>
-          <li class="list-group-item"> Category: <%= expense.category %></li>
-      </ul>
-        <%= link_to "Edit Expense", edit_event_expense_path(@event, expense), class: "btn btn-secondary" %>
-        <%= link_to "Delete", event_expense_path(@event, expense),
-        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
-    <% end %>
+  <div class="d-flex mb-3">
+    <div class="me-auto p-2">
+      <h3><strong>Expenses</strong></h3>
+    </div>
+    <div class="p-2">
+      <%= link_to "Add Expense", new_event_expense_path(@event), class: "btn btn-primary" %>
+    </div>
+  </div>
+  <ul class="list-group">
+    <% @event.expenses.each do |expense| %>
+      <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
+        <strong><%= "#{expense.category} - #{expense.description}" %></strong>
+        <span class="badge bg-dark">
+          <%= "#{@event.currency} #{expense.amount}" %>
+        </span>
+      </li>
+    </ul>
+      <%= link_to "Edit Expense", edit_event_expense_path(@event, expense), class: "btn btn-secondary" %>
+      <%= link_to "Delete", event_expense_path(@event, expense),
+      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
+  <% end %>
 </div>

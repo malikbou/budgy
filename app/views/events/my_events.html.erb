@@ -6,7 +6,7 @@
   <div class="container-sm">
   <h3><strong>Your Trips</strong></h3>
     <% @events.each do |event| %>
-      <%= link_to event_path(event), class: "link" do %>
+      <%= link_to event_path(event) do %>
         <div class="card-trip mt-2 mb-3">
           <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
           <div class="card-trip-infos">
@@ -14,8 +14,6 @@
               <h2><%= event.name %></h2>
               <p><%= event.description %></p>
             </div>
-            <h2 class="card-trip-pricing">£99.99</h2>
-            <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" />
           </div>
         </div>
       <% end %>
