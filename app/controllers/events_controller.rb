@@ -25,6 +25,14 @@ class EventsController < ApplicationController
       human_name = Budget.human_attribute_name(key)
       @clean_sort[human_name] = value
     end
+
+    # group budget by categories
+    # @budget_totals = @event.budgets.group(:category).sum(:amount)
+
+    @budget_totals = @event.budgets.map do |budget|
+      budget.attributes.reject { |key| %w[id user_id created_at updated_at event_id].include?(key) }
+      .transform_keys { |key| Budget.human_attribute_name(key) }
+    end.reduce({}, :merge!)
   end
 
   def new

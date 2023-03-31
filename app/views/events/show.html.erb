@@ -129,5 +129,28 @@
 </div>
 
 <div id="chart" class="container">
+  <h5>My Expenses</h5>
   <%= bar_chart @clean_sort, library: { title: 'Expense Categories', colors: ['#b00', '#0b0', '#00b'] } %>
+</div>
+
+<div id="chart" class="container">
+  <h5>My Expenses</h5>
+  <%= bar_chart @budget_totals, library: { title: 'Expense Categories', colors: ['#b00', '#0b0', '#00b'] } %>
+</div>
+
+<div id="chart" class="container">
+  <h5>Test</h5>
+  <%= bar_chart [
+  { name: "My Budget", data: @budget_totals },
+  { name: "My Expenses", data: @clean_sort }
+], stacked: true, library: {title: 'Side-by-Side Bar Chart', colors: ['#b00', '#0b0']} %>
+</div>
+
+
+<div id="chart" class="container">
+  <h5>Test</h5>
+  <%= bar_chart [
+  { name: "My Budget", data: @budget_totals },
+  { name: "My Expenses", data: @clean_sort }
+  ], overlap: true, library: {title: 'Side-by-Side Bar Chart', colors: ['#b00', '#0b0']} %>
 </div>
