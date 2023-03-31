@@ -6,7 +6,7 @@ class EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
     # if today's date is >= to start date and <= end date
-      # calculate days left in trip
+    # calculate days left in trip
     # else don't calculate and say trip has not started
     if (Date.today >= @event.start_date) && (Date.today <= @event.end_date)
       @days_left = (@event.end_date - Date.today).to_i
@@ -17,7 +17,14 @@ class EventsController < ApplicationController
 
     # group expenses by categories
     @category_totals = @event.expenses.group(:category).sum(:amount)
-    @sorted_categories = @category_totals.sort_by { |category, amount| -amount }
+    @sorted_categories = @category_totals.sort_by { |category, amount| -amount }.to_h
+
+    # make it human readable
+    @clean_sort = {}
+    @sorted_categories.each do |key, value|
+      human_name = Budget.human_attribute_name(key)
+      @clean_sort[human_name] = value
+    end
   end
 
   def new
