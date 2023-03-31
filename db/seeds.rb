@@ -88,7 +88,8 @@ lisbon_expenses = {user_id: user_id,
   description: "Fogo de Chao",
   participants: "Malik",
   amount: 200,
-  category: "Food"}
+  category: Budget.all_columns.sample.last
+}
 [lisbon_expenses].each do |attributes|
   expense = Expense.create!(attributes)
   puts "Added #{expense.amount} at #{expense.description} in #{expense.event.name}"

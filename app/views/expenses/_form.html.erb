@@ -1,10 +1,9 @@
 <div class="container sm">
   <%= simple_form_for [event, expense] do |f| %>
     <%= f.input :description %>
-    <%= f.input :category, collection: Budget::all_columns, as: :select, prompt: 'Select Category', label: false %>
-    <%= f.input :category %>
-    <%= f.input :participants %>
+    <%= f.input :category, collection: Budget::all_columns, as: :select, prompt: 'Select a Category' %>
     <%= f.input :amount %>
+    <%= f.input :participants %>
     <%= f.submit "Add expense", class: "btn btn-primary" %>
   <% end %>
 </div>
