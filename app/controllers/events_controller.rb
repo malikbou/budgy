@@ -5,6 +5,14 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+    # if today's date is >= to start date and <= end date
+      # calculate days left in trip
+    # else don't calculate and say trip has not started
+    if (Date.today >= @event.start_date) && (Date.today <= @event.end_date)
+      @days_left = (@event.end_date - Date.today).to_i
+    else
+      @days_left = nil
+    end
   end
 
   def new
