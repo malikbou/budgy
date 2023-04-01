@@ -143,44 +143,66 @@
   <% end %>
 </div>
 
+
 <div class="container sm mb-5">
-  <div class="d-flex mb-3">
-    <div class="me-auto p-2">
-      <h3><strong>Expenses</strong></h3>
+  <div class="d-flex">
+    <div class="me-auto">
+      <h5><strong>Transactions</strong></h5>
     </div>
-    <div class="p-2">
-      <%= link_to "Add Expense", new_event_expense_path(@event), class: "btn btn-primary" %>
+    <div>
+      <%= link_to "Add transaction", new_event_expense_path(@event), class: "link text-primary" %>
     </div>
   </div>
-  <ul class="list-group">
-    <% @event.expenses.each do |expense| %>
-      <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
-        <strong><%= "#{Budget.human_attribute_name(expense.category)} - #{expense.description}" %></strong>
-        <span class="badge bg-dark">
-          <%= "#{@event.currency} #{expense.amount}" %>
-        </span>
-          <%= link_to "🖋️", edit_event_expense_path(@event, expense), class: "btn btn-sm" %>
-          <%= link_to "X", event_expense_path(@event, expense),
-          data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger btn-sm" %>
-      <% end %>
-      </li>
-    </ul>
-
+  <% @event.expenses.each do |expense| %>
+    <div class="card mb-1">
+      <div class="row d-flex justify-content-between align-items-center">
+        <div class="col-2 p-3">
+          <%= "#{Budget.human_attribute_name(expense.category)}" %>
+        </div>
+        <div class="col">
+          <p class="pt-2">
+            <%= expense.description %>
+          </p>
+          <p>
+            Date Placeholder
+          </p>
+        </div>
+        <div class="col">
+          <p class="text-right">
+            <span class="badge bg-dark">
+              <%= "#{@event.currency} #{expense.amount}" %>
+            </span>
+          </p>
+          <p>
+            <%= link_to "🖋️", edit_event_expense_path(@event, expense), class: "btn btn-sm" %>
+            <%= link_to "X", event_expense_path(@event, expense),
+            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger btn-sm" %>
+          </p>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>
+
+
+
 
 <div class="container sm mb-5">
-  <ul>
-    <% @clean_sort.each do |key, value| %>
-      <li>
-        <%= "#{key}: #{value}" %>
-      </li>
-    <% end %>
-  </ul>
-</div>
-
-<div id="chart" class="container mb-3">
-  <h5>My Budget</h5>
-  <%= bar_chart @budget_totals, library:
-  { title: 'Expense Categories', colors: ['#8A2BE2']
-  } %>
+  <h5>Transactions</h5>
+  <div class="card">
+    <div class="row d-flex justify-content-between align-items-center">
+      <div class="col">
+        One of three columns
+      </div>
+      <div class="col">
+          <p>One of three columns</p>
+          <p>One of three columns</p>
+      </div>
+      <div class="col">
+        <p class="text-right">
+          One of three columns
+        </p>
+      </div>
+    </div>
+  </div>
 </div>
