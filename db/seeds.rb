@@ -33,7 +33,8 @@ puts "First user ID is #{user_id}"
 puts "\n"
 
 puts "Creating events..."
-lisbon = {user_id: user_id,
+lisbon = {
+  user_id: user_id,
   name: "Lisboa",
   description: "The bois in Lisbon",
   category: "Trip",
@@ -41,8 +42,11 @@ lisbon = {user_id: user_id,
   start_date: "2023-01-01",
   end_date: "2023-01-30",
   budget: 1550,
-  currency: 'EUR'}
-madrid = {user_id: user_id,
+  currency: 'EUR'
+}
+
+madrid = {
+  user_id: user_id,
   name: "Madrid",
   description: "The bois in Madrid",
   category: "Trip",
@@ -50,7 +54,8 @@ madrid = {user_id: user_id,
   start_date: "2023-02-14",
   end_date: "2023-02-25",
   budget: 1280,
-  currency: 'EUR'}
+  currency: 'EUR'
+}
 
 [lisbon, madrid].each do |attributes|
   event = Event.create!(attributes)
@@ -65,7 +70,8 @@ puts "First event ID is #{event_id}"
 puts "\n"
 
 puts "Creating budgets..."
-lisbon_budget = {user_id: user_id,
+lisbon_budget = {
+  user_id: user_id,
   event_id: event_id,
   flights: 550,
   accommodation: 400,
@@ -74,7 +80,9 @@ lisbon_budget = {user_id: user_id,
   entertainment: 250,
   activities: 100,
   shopping: 280,
-  emergency: 100}
+  emergency: 100
+}
+
 [lisbon_budget].each do |attributes|
   budget = Budget.create!(attributes)
   puts "Created Budget for #{budget.event.name}"
@@ -83,13 +91,19 @@ puts "Finished creating budgets!"
 puts "\n"
 
 puts "Adding expenses..."
-lisbon_expenses = {user_id: user_id,
-  event_id: event_id,
-  description: "Fogo de Chao",
-  participants: "Malik",
-  amount: 200,
-  category: "Food"}
-[lisbon_expenses].each do |attributes|
+expenses = []
+
+10.times do
+  expenses << {
+    user_id: user_id,
+    event_id: event_id,
+    description: "Random",
+    participants: "Malik",
+    amount: rand(20..200),
+    category: Budget.all_columns.sample.last
+  }
+end
+expenses.each do |attributes|
   expense = Expense.create!(attributes)
   puts "Added #{expense.amount} at #{expense.description} in #{expense.event.name}"
 end
