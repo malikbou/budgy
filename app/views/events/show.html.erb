@@ -3,78 +3,41 @@
   <h6><%= @event.description %></h6>
   <p><%= "#{@event.start_date.strftime('%b %d, %Y')} to #{@event.end_date.strftime('%b %d, %Y')}" %></p>
 
-<div class="card mb-3">
-  <div class="card-body">
-    <h6 class="card-title">Auto & Transport</h5>
-    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-  </div>
-</div>
-
-<div class="card transaction">
-  <div class="card-body">
-    <h6 class="card-title">Auto & Transport</h5>
-    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-  </div>
-</div>
-
-<div class="transaction rounded container mt-5 mb-5">
-  <div class="d-flex bd-highlight justify-content-start align-items-center">
-    <div class="p-2 bd-highlight">
-      Category
-    </div>
-    <div class="p-2 flex-grow-1 bd-highlight">
-      <span>
-      Transaction Name
-      <br>
-        <p class="card-text">
-          <small class="text-muted">Date of Transaction</small>
-        </p>
-      </span>
-    </div>
-    <div class="p-2 bd-highlight">
-      <span class="badge bg-dark">
-        EUR 12
-      </span>
-    </div>
-  </div>
-</div>
-
-  <div class="card d-flex justify-content-between">
-    <div class="mr-auto p-2">
-      <h5>💵 Spending</h5>
-    </div>
-    <div class="align-items-end p-2">
-      <div class="col">
-        <strong><%= "#{@event.currency} #{@event.expenses.sum(:amount)}" %></strong>
-      </div>
-      <div class="col">
-        <small><%= "#{@event.currency} #{@event.budget}" %></small>
-      </div>
-    </div>
-  </div>
-
-  <ul class="list-group">
-      <li class="list-group-item d-flex justify-content-between align-items-center">
+  <div class="card">
+    <div class="d-flex bd-highlight justify-content-start align-items-center mb-2">
+      <div class="p-2 flex-grow-1 bd-highlight">
         <h5>💵 Spending</h5>
-        <span class="badge bg-dark">
-          <%= "#{@event.currency} #{@event.expenses.sum(:amount)} over #{@event.currency} #{@event.budget}"  %>
+      </div>
+      <div class="p-2 bd-highlight">
+        <span>
+          <strong><%= "Expenses: #{@event.currency} #{@event.expenses.sum(:amount)}" %></strong>
+        <br>
+          <p class="card-text">
+            <small class="text-muted"><%= "Budget: #{@event.currency} #{@event.budget}" %></small>
+          </p>
         </span>
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <div class="d-flex flex-column">
-          <div class="p-2">
-            <h5>⏰ Daily Allowance</h5>
-          </div>
-          <div class="p-2">
-            <p><%="#{@days_left} days left"%></p>
-          </div>
-        </div>
-        <span class="badge bg-dark">
-          <%="#{@event.currency} #{@daily_budget} per day"%>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="d-flex bd-highlight justify-content-start align-items-center mb-2">
+      <div class="p-2 flex-grow-1 bd-highlight">
+        <h5>⏰ Daily Allowance</h5>
+      </div>
+      <div class="p-2 bd-highlight">
+        <span>
+          <strong><%="#{@event.currency} #{@daily_budget} per day"%></strong>
+        <br>
+          <p class="card-text">
+            <small class="text-muted">
+            <%="#{@days_left} days left"%>
+            </small>
+          </p>
         </span>
-  </ul>
+      </div>
+    </div>
+  </div>
 
   <br>
   <%= link_to "Back to My Events", my_events_path, class: "btn btn-primary btn-sm" %>
