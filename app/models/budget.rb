@@ -7,16 +7,4 @@ class Budget < ApplicationRecord
       columns << [Budget.human_attribute_name(column_name), column_name]
     end
   end
-
-  def emoji
-    case category
-    when "accommodation" then "🏠"
-    when "flights" then "🛩️"
-    when "eating_out" then "🍔"
-    when "entertainment" then "🎭"
-    when "activities" then "🏄‍♂️"
-    when "shopping" then "🛍️"
-    when "emergency" then "🚨"
-    end
-  end
 end

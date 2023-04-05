@@ -1,14 +1,12 @@
 <div class="container sm">
-  <div class="card mb-2">
-    <div class="d-flex">
-      <div class="me-auto p-1">
-        <h3><%= @event.name %></h3>
-        <h6 class="text-muted"><%= @event.description %></h6>
-        <p><%= "#{@event.start_date.strftime('%b %d, %Y')} to #{@event.end_date.strftime('%b %d, %Y')}" %></p>
-      </div>
-      <div class="p-2">
-        <%= link_to "Edit Event", edit_event_path(@event), class: "btn btn-secondary btn-sm" %>
-      </div>
+  <div class="d-flex">
+    <div class="me-auto p-1">
+      <h3><%= @event.name %></h3>
+      <h6 class="text-muted"><%= @event.description %></h6>
+      <p><%= "#{@event.start_date.strftime('%b %d, %Y')} to #{@event.end_date.strftime('%b %d, %Y')}" %></p>
+    </div>
+    <div class="p-2">
+      <%= link_to "Edit Event", edit_event_path(@event), class: "btn btn-secondary btn-sm" %>
     </div>
   </div>
 
@@ -33,7 +31,7 @@
     <div class="d-flex bd-highlight justify-content-start align-items-center">
       <div class="p-2 flex-grow-1 bd-highlight">
         <h6>⏰ Daily Allowance </h6>
-        <p>per day</p>
+        <p><small>per day</small></p>
       </div>
       <div class="p-2 bd-highlight">
         <span>
@@ -66,7 +64,7 @@
     <% budget.attributes.sort.each do |category, amount| %>
       <% if @excluded_categories.exclude?(category) %>
         <li class="list-group-item d-flex justify-content-between align-items-center">
-          <%= label_tag category.capitalize %>
+          <%= "#{category.emoji} #{Budget.human_attribute_name(category)}" %>
           <span class="badge bg-dark">
             <%= "#{@event.currency} #{amount}" %>
           </span>
@@ -98,7 +96,7 @@
   <% @event.expenses.each do |expense| %>
     <div class="transaction d-flex bd-highlight justify-content-start align-items-center mb-2">
       <div class="p-2 bd-highlight">
-        <%= "#{Budget.human_attribute_name(expense.category)}" %>
+        <%= expense.category.emoji %>
       </div>
       <div class="p-2 flex-grow-1 bd-highlight">
         <span>
