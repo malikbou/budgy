@@ -54,6 +54,22 @@
 </div>
 
 <div class="container sm mb-5">
+  <ul class="list-group">
+  <% @event.budgets.each do |budget| %>
+    <% budget.attributes.each do |category, amount| %>
+      <% if @excluded_categories.exclude?(category) %>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <%= label_tag category.capitalize %>
+          <span class="badge bg-dark">
+            <%= "#{@event.currency} #{amount}" %>
+          </span>
+        </li>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+<div class="container sm mb-5">
   <h3><strong>Budget</strong></h3>
   <div id="chart" class="container mb-3">
     <%= bar_chart [

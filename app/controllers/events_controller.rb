@@ -33,6 +33,9 @@ class EventsController < ApplicationController
       budget.attributes.reject { |key| %w[id user_id created_at updated_at event_id].include?(key) }
       .transform_keys { |key| Budget.human_attribute_name(key) }
     end.reduce({}, :merge!)
+
+    @excluded_categories = ["id", "user_id", "event_id", "created_at", "updated_at"]
+
   end
 
   def new
