@@ -97,6 +97,15 @@
     <% budget.attributes.sort.each do |category, amount| %>
       <% if @excluded_categories.exclude?(category) %>
         <li class="list-group-item d-flex justify-content-between align-items-center">
+          <%= category.emoji %>
+
+
+
+
+
+
+
+
           <%= label_tag category.capitalize %>
           <span class="badge bg-dark">
             <%= "#{@event.currency} #{amount}" %>
@@ -185,5 +194,4 @@
 
 <div class="container sm mb-5">
   <h5>Transactions</h5>
-
 </div>
