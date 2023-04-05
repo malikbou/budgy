@@ -1,33 +1,43 @@
-<div class="container sm mb-3">
-  <h3><strong><%= @event.name %></strong></h3>
-  <h6><%= @event.description %></h6>
-  <p><%= "#{@event.start_date.strftime('%b %d, %Y')} to #{@event.end_date.strftime('%b %d, %Y')}" %></p>
+<div class="container sm">
+  <div class="card mb-2">
+    <div class="d-flex">
+      <div class="me-auto p-1">
+        <h3><%= @event.name %></h3>
+        <h6 class="text-muted"><%= @event.description %></h6>
+        <p><%= "#{@event.start_date.strftime('%b %d, %Y')} to #{@event.end_date.strftime('%b %d, %Y')}" %></p>
+      </div>
+      <div class="p-2">
+        <%= link_to "Edit Event", edit_event_path(@event), class: "btn btn-secondary btn-sm" %>
+      </div>
+    </div>
+  </div>
 
-  <div class="card mb-1">
-    <div class="d-flex bd-highlight justify-content-start align-items-center mb-2">
+  <div class="card mb-2">
+    <div class="d-flex bd-highlight justify-content-start align-items-center">
       <div class="p-2 flex-grow-1 bd-highlight">
-        <h5>💵 Spending</h5>
+        <h6>💵 Spending </h6>
       </div>
       <div class="p-2 bd-highlight">
         <span>
-          <strong><%= "Expenses: #{@event.currency} #{@event.expenses.sum(:amount)}" %></strong>
+          <strong><%= "#{@event.currency} #{@event.expenses.sum(:amount) - @event.budget}" %></strong>
         <br>
           <p class="card-text">
-            <small class="text-muted"><%= "Budget: #{@event.currency} #{@event.budget}" %></small>
+            <small class="text-muted"><%= "Over #{@event.currency} #{@event.budget}" %></small>
           </p>
         </span>
       </div>
     </div>
   </div>
 
-  <div class="card mb-1">
-    <div class="d-flex bd-highlight justify-content-start align-items-center mb-2">
+  <div class="card mb-2">
+    <div class="d-flex bd-highlight justify-content-start align-items-center">
       <div class="p-2 flex-grow-1 bd-highlight">
-        <h5>⏰ Daily Allowance</h5>
+        <h6>⏰ Daily Allowance </h6>
+        <p>per day</p>
       </div>
       <div class="p-2 bd-highlight">
         <span>
-          <strong><%="#{@event.currency} #{@daily_budget} per day"%></strong>
+          <strong><%="#{@event.currency} #{@daily_budget}"%></strong>
         <br>
           <p class="card-text">
             <small class="text-muted">
@@ -38,10 +48,6 @@
       </div>
     </div>
   </div>
-  <%= link_to "Back to My Events", my_events_path, class: "btn btn-primary btn-sm" %>
-  <%= link_to "Edit Event", edit_event_path(@event), class: "btn btn-secondary btn-sm" %>
-  <%= link_to "Delete", event_path(@event),
-    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger btn-sm" %>
 </div>
 
 <div class="container sm mb-3">
