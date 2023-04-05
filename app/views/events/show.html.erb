@@ -1,9 +1,9 @@
-<div class="container sm mb-5">
+<div class="container sm mb-3">
   <h3><strong><%= @event.name %></strong></h3>
   <h6><%= @event.description %></h6>
   <p><%= "#{@event.start_date.strftime('%b %d, %Y')} to #{@event.end_date.strftime('%b %d, %Y')}" %></p>
 
-  <div class="card">
+  <div class="card mb-1">
     <div class="d-flex bd-highlight justify-content-start align-items-center mb-2">
       <div class="p-2 flex-grow-1 bd-highlight">
         <h5>💵 Spending</h5>
@@ -20,7 +20,7 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card mb-1">
     <div class="d-flex bd-highlight justify-content-start align-items-center mb-2">
       <div class="p-2 flex-grow-1 bd-highlight">
         <h5>⏰ Daily Allowance</h5>
@@ -38,21 +38,21 @@
       </div>
     </div>
   </div>
-
-  <br>
   <%= link_to "Back to My Events", my_events_path, class: "btn btn-primary btn-sm" %>
   <%= link_to "Edit Event", edit_event_path(@event), class: "btn btn-secondary btn-sm" %>
   <%= link_to "Delete", event_path(@event),
     data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger btn-sm" %>
 </div>
 
-<div class="container sm mb-5">
+<div class="container sm mb-3">
   <div class="d-flex mb-1">
     <div class="me-auto p-2">
-      <h3><strong>Budget</strong></h3>
+      <h5><strong>Budget</strong></h5>
     </div>
     <div class="p-2">
-      <%= link_to "Edit Budget", edit_event_budget_path(@event, @event.budgets.first), class: "btn btn-secondary" %>
+      <% if @event.budgets.exists? %>
+        <%= link_to "Edit Budget", edit_event_budget_path(@event, @event.budgets.first), class: "btn btn-secondary btn-sm" %>
+      <% end %>
     </div>
   </div>
   <ul class="list-group">
@@ -70,8 +70,8 @@
   <% end %>
 </div>
 
-<div class="container sm mb-5">
-  <h3><strong>Budget vs Expenses</strong></h3>
+<div class="container sm mb-3">
+  <h5><strong>Budget vs Expenses</strong></h5>
   <div id="chart" class="container mb-3">
     <%= bar_chart [
     { name: "My Budget", data: @budget_totals },
@@ -80,7 +80,7 @@
   </div>
 </div>
 
-<div class="container mt-5 mb-5">
+<div class="container mb-3">
   <div class="d-flex">
     <div class="me-auto">
       <h5><strong>Transactions</strong></h5>
