@@ -1,13 +1,13 @@
 <div class="container sm">
   <%= simple_form_for(event) do |f| %>
-    <%= f.input :name %>
-    <%= f.input :description %>
-    <%= f.input :category %>
-    <%= f.input :people %>
+    <%= f.input :name, placeholder: 'Tulum' %>
+    <%= f.input :description, placeholder: 'Springbreak trip' %>
+    <%= f.input :category, placeholder: 'Vacation' %>
+    <%= f.input :people, placeholder: 'Malik & Andrea'%>
     <%= f.input :start_date %>
     <%= f.input :end_date %>
-    <%= f.input :budget %>
-    <%= f.input :currency %>
-    <%= f.submit class: "btn-primary" %>
+    <%= f.input :budget, placeholder: 'Tulum' %>
+    <%= f.input :currency, placeholder: 'Pesos' %>
+    <%= f.submit class: "btn btn-primary btn-sm btn-block" %>
   <% end %>
 </div>
