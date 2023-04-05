@@ -35,7 +35,6 @@ class EventsController < ApplicationController
     end.reduce({}, :merge!)
 
     @excluded_categories = ["id", "user_id", "event_id", "created_at", "updated_at"]
-
   end
 
   def new

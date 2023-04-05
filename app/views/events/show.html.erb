@@ -11,6 +11,36 @@
   </div>
 </div>
 
+<div class="card transaction">
+  <div class="card-body">
+    <h6 class="card-title">Auto & Transport</h5>
+    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+  </div>
+</div>
+
+<div class="transaction rounded container mt-5 mb-5">
+  <div class="d-flex bd-highlight justify-content-start align-items-center">
+    <div class="p-2 bd-highlight">
+      Category
+    </div>
+    <div class="p-2 flex-grow-1 bd-highlight">
+      <span>
+      Transaction Name
+      <br>
+        <p class="card-text">
+          <small class="text-muted">Date of Transaction</small>
+        </p>
+      </span>
+    </div>
+    <div class="p-2 bd-highlight">
+      <span class="badge bg-dark">
+        EUR 12
+      </span>
+    </div>
+  </div>
+</div>
+
   <div class="card d-flex justify-content-between">
     <div class="mr-auto p-2">
       <h5>💵 Spending</h5>
@@ -54,7 +84,7 @@
 </div>
 
 <div class="container sm mb-5">
-  <div class="d-flex mb-3">
+  <div class="d-flex mb-1">
     <div class="me-auto p-2">
       <h3><strong>Budget</strong></h3>
     </div>
@@ -64,7 +94,7 @@
   </div>
   <ul class="list-group">
   <% @event.budgets.each do |budget| %>
-    <% budget.attributes.each do |category, amount| %>
+    <% budget.attributes.sort.each do |category, amount| %>
       <% if @excluded_categories.exclude?(category) %>
         <li class="list-group-item d-flex justify-content-between align-items-center">
           <%= label_tag category.capitalize %>
@@ -88,7 +118,7 @@
 </div>
 
 <div class="container sm mb-5">
-  <div class="d-flex mb-3">
+  <div class="d-flex mb-1">
     <div class="me-auto p-2">
       <h3><strong>Expenses</strong></h3>
     </div>
@@ -155,57 +185,5 @@
 
 <div class="container sm mb-5">
   <h5>Transactions</h5>
-  <div class="card">
-    <div class="row d-flex justify-content-between align-items-center">
-      <div class="col">
-        One of three columns
-      </div>
-      <div class="col">
-          <p>One of three columns</p>
-          <p>One of three columns</p>
-      </div>
-      <div class="col">
-        <p class="text-right">
-          One of three columns
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
 
-
-<div class="container sm mb-5">
-  <div class="card">
-    <div class="row d-flex justify-content-between align-items-center">
-      <div class="col">
-        <h5>💵 Spending</h5>
-      </div>
-      <div class="col ml-auto">
-        <p>
-          <strong><%= "#{@event.currency} #{@event.expenses.sum(:amount)}" %></strong>
-        </p>
-        <p>
-          <small><%= "#{@event.currency} #{@event.budget}" %></small>
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="container sm mb-5">
-  <div class="card">
-    <div class="row d-flex justify-content-between align-items-center">
-      <div class="col-8">
-        <h5>💵 Spending</h5>
-      </div>
-      <div class="col ml-auto">
-        <p class="text-right">
-          <strong><%= "#{@event.currency} #{@event.expenses.sum(:amount)}" %></strong>
-        </p>
-        <p class="text-right">
-          <small><%= "#{@event.currency} #{@event.budget}" %></small>
-        </p>
-      </div>
-    </div>
-  </div>
 </div>
