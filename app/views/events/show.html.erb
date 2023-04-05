@@ -97,7 +97,6 @@
     <% budget.attributes.sort.each do |category, amount| %>
       <% if @excluded_categories.exclude?(category) %>
         <li class="list-group-item d-flex justify-content-between align-items-center">
-
           <%= label_tag category.capitalize %>
           <span class="badge bg-dark">
             <%= "#{@event.currency} #{amount}" %>
@@ -118,32 +117,7 @@
   </div>
 </div>
 
-<div class="container sm mb-5">
-  <div class="d-flex mb-1">
-    <div class="me-auto p-2">
-      <h3><strong>Expenses</strong></h3>
-    </div>
-    <div class="p-2">
-      <%= link_to "Add Expense", new_event_expense_path(@event), class: "btn btn-primary" %>
-    </div>
-  </div>
-  <ul class="list-group">
-    <% @event.expenses.each do |expense| %>
-      <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
-        <strong><%= "#{Budget.human_attribute_name(expense.category)} - #{expense.description}" %></strong>
-        <span class="badge bg-dark">
-          <%= "#{@event.currency} #{expense.amount}" %>
-        </span>
-      </li>
-    </ul>
-      <%= link_to "Edit Expense", edit_event_expense_path(@event, expense), class: "btn btn-secondary btn-sm" %>
-      <%= link_to "Delete", event_expense_path(@event, expense),
-      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger btn-sm" %>
-  <% end %>
-</div>
-
-
-<div class="container sm mb-5">
+<div class="container mt-5 mb-5">
   <div class="d-flex">
     <div class="me-auto">
       <h5><strong>Transactions</strong></h5>
@@ -153,37 +127,27 @@
     </div>
   </div>
   <% @event.expenses.each do |expense| %>
-    <div class="card mb-1">
-      <div class="row d-flex justify-content-between align-items-center">
-        <div class="col-2 p-3">
-          <%= "#{Budget.human_attribute_name(expense.category)}" %>
-        </div>
-        <div class="col">
-          <p class="pt-2">
-            <%= expense.description %>
+    <div class="transaction d-flex bd-highlight justify-content-start align-items-center mb-2">
+      <div class="p-2 bd-highlight">
+        <%= "#{Budget.human_attribute_name(expense.category)}" %>
+      </div>
+      <div class="p-2 flex-grow-1 bd-highlight">
+        <span>
+          <%= expense.description %>
+        <br>
+          <p class="card-text">
+            <small class="text-muted">Date Placeholder</small>
           </p>
-          <p>
-            Date Placeholder
-          </p>
-        </div>
-        <div class="col">
-          <p class="text-right">
-            <span class="badge bg-dark">
-              <%= "#{@event.currency} #{expense.amount}" %>
-            </span>
-          </p>
-          <p>
-            <%= link_to "🖋️", edit_event_expense_path(@event, expense), class: "btn btn-sm" %>
-            <%= link_to "X", event_expense_path(@event, expense),
+        </span>
+      </div>
+      <div class="p-2 bd-highlight">
+        <span class="badge bg-dark">
+          <%= "#{@event.currency} #{expense.amount}" %>
+          <%= link_to "🖋️", edit_event_expense_path(@event, expense), class: "btn btn-sm" %>
+          <%= link_to "X", event_expense_path(@event, expense),
             data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger btn-sm" %>
-          </p>
-        </div>
+        </span>
       </div>
     </div>
   <% end %>
-</div>
-
-
-<div class="container sm mb-5">
-  <h5>Transactions</h5>
 </div>
