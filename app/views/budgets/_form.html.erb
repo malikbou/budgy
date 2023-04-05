@@ -8,6 +8,7 @@
     <%= f.input :activities %>
     <%= f.input :shopping %>
     <%= f.input :emergency %>
-    <%= f.submit "Submit budget", class: "btn btn-primary" %>
+    <%= f.submit class: "btn btn-primary btn-sm" %>
+    <%= link_to "Back", event_path(event), class: "btn btn-secondary btn-sm" %>
   <% end %>
 </div>
