@@ -4,7 +4,7 @@
     <%= f.input :category, collection: (Budget.all_columns)  %>
     <%= f.input :amount %>
     <%= f.input :participants %>
-    <%= f.submit "Add expense", class: "btn btn-primary" %>
+    <%= f.submit "Add expense", class: "btn btn-primary btn-sm" %>
+    <%= link_to "Back", event_path(event), class: "btn btn-secondary btn-sm" %>
   <% end %>
-  <%= link_to "Back", event_path(event), class: "btn btn-secondary link" %>
 </div>
