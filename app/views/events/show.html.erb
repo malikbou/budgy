@@ -35,6 +35,8 @@
     <div class="p-2">
       <% if @event.budgets.exists? %>
         <%= link_to icon('fa-solid', 'pen-to-square'), edit_event_budget_path(@event, @event.budgets.first), class: "btn btn-secondary btn-sm" %>
+      <% else %>
+        <%= link_to icon('fa-solid', 'plus'), new_event_budget_path(@event), class: "btn btn-primary btn-sm" %>
       <% end %>
     </div>
   </div>
