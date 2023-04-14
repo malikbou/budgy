@@ -44,7 +44,8 @@ lisbon = {
   start_date: "2023-01-01",
   end_date: "2023-01-30",
   budget: 1550,
-  currency: 'EUR'
+  currency: 'EUR',
+  image_url: 'https://images.unsplash.com/photo-1585208798174-6cedd86e019a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1746&q=80'
 }
 
 madrid = {
@@ -56,7 +57,8 @@ madrid = {
   start_date: "2023-02-14",
   end_date: "2023-02-25",
   budget: 1280,
-  currency: 'EUR'
+  currency: 'EUR',
+  image_url: 'https://images.unsplash.com/photo-1574556462575-eb106a5865a0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8bWFkcmlkfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60'
 }
 
 [lisbon, madrid].each do |attributes|
