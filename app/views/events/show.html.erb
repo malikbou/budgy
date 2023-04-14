@@ -94,9 +94,9 @@
     </div>
   </div>
   <% current_date = @event.expenses.order(date: :desc).first.date %>
-  <%= current_date %>
+  <p class="mb-2 "><strong><%= current_date.strftime('%A %d %B') %></strong></p>
   <% @event.expenses.order(date: :desc).each do |expense| %>
-    <%= expense.date if current_date != expense.date %>
+    <p class="mb-2 "><strong><%= expense.date.strftime('%A %d %B') if current_date != expense.date %></strong></p>
     <% current_date = expense.date %>
     <div class="transaction d-flex bd-highlight justify-content-start align-items-center mb-2">
       <div class="p-2 bd-highlight">
@@ -104,7 +104,7 @@
       </div>
       <div class="p-2 flex-grow-1 bd-highlight">
         <span>
-          <%= expense.description %>
+          <strong><%= expense.description %></strong>
         </span>
       </div>
       <div class="p-2 bd-highlight">

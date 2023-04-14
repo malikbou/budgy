@@ -1,3 +1,5 @@
+require 'faker'
+
 puts "Cleaning database..."
 
 Event.destroy_all
@@ -97,7 +99,7 @@ expenses = []
   expenses << {
     user_id: user_id,
     event_id: event_id,
-    description: "Random",
+    description: Faker::Commerce.brand,
     participants: "Malik",
     amount: rand(20..200),
     category: Budget.all_columns.sample.last,
