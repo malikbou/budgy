@@ -6,7 +6,7 @@
       <p><%= "#{@event.start_date.strftime('%b %d, %Y')} to #{@event.end_date.strftime('%b %d, %Y')}" %></p>
     </div>
     <div class="p-1">
-      <%= link_to "Edit", edit_event_path(@event), class: "btn btn-secondary btn-sm" %>
+      <%= link_to icon('fa-solid', 'pen-to-square'), edit_event_path(@event), class: "btn btn-secondary btn-sm" %>
     </div>
   </div>
 
@@ -74,13 +74,13 @@
 </div>
 
 <div class="container sm mb-3">
-  <div class="d-flex mb-1">
+  <div class="section d-flex mb-1">
     <div class="me-auto p-2">
       <h5><strong>Budget</strong></h5>
     </div>
     <div class="p-2">
       <% if @event.budgets.exists? %>
-        <%= link_to "Edit Budget", edit_event_budget_path(@event, @event.budgets.first), class: "btn btn-secondary btn-sm" %>
+        <%= link_to icon('fa-solid', 'pen-to-square'), edit_event_budget_path(@event, @event.budgets.first), class: "btn btn-secondary btn-sm" %>
       <% end %>
     </div>
   </div>
@@ -99,7 +99,7 @@
   <% end %>
 </div>
 
-<div class="container sm mb-3">
+<div class="section container sm mb-3">
   <h5><strong>Budget vs Expenses</strong></h5>
   <div id="chart" class="container mb-3">
     <%= bar_chart [
@@ -110,7 +110,7 @@
 </div>
 
 <div class="container mb-3">
-  <div class="d-flex">
+  <div class="section d-flex">
     <div class="me-auto">
       <h5><strong>Transactions</strong></h5>
     </div>
@@ -134,9 +134,9 @@
       </div>
       <div class="p-2 bd-highlight">
         <span class="badge bg-dark">
-          <%= "#{@event.currency} #{expense.amount}" %>
-          <%= link_to "🖋️", edit_event_expense_path(@event, expense), class: "btn btn-sm" %>
-          <%= link_to "X", event_expense_path(@event, expense),
+          <%= "#{@event.currency} #{expense.amount.round}" %>
+          <%= link_to icon('fa-solid', 'pen-to-square'), edit_event_expense_path(@event, expense), class: "btn btn-sm", style: "color: #ffffff" %>
+          <%= link_to icon('fa-solid', 'trash'), event_expense_path(@event, expense),
             data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger btn-sm" %>
         </span>
       </div>
