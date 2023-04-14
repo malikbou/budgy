@@ -1,15 +1,15 @@
 <div class="container-sm">
-  <div class="container-sm mb-3">
+  <div class="container-sm mb-3 mt-2 greeting">
   <h2><%= "Hello #{current_user.first_name}!" %></h2>
   </div>
 
   <div class="container-sm">
-    <div class="d-flex mb-1 align-items-center">
+    <div class="section d-flex mb-1 align-items-center">
       <div class="me-auto p-2">
-        <h5><strong>Your Trips</strong></h5>
+        <h5>Your Trips</h5>
       </div>
       <div class="p-2">
-          <%= link_to "Add Trip", new_event_path, class: "btn btn-primary btn-sm" %>
+        <%= link_to icon('fa-solid', 'plus'), new_event_path, class: "btn btn-primary btn-sm" %>
       </div>
     </div>
     <% @events.each do |event| %>
