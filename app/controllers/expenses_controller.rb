@@ -39,6 +39,6 @@ before_action :set_event, only: %i[new create edit destroy update]
   end
 
   def expense_params
-    params.require(:expense).permit(:description, :participants, :amount, :category)
+    params.require(:expense).permit(:description, :participants, :amount, :category, :date)
   end
 end

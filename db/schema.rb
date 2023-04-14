@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_28_161631) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_14_154802) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,6 +43,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_28_161631) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.float "budget"
+    t.string "image_url"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
@@ -55,6 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_28_161631) do
     t.datetime "updated_at", null: false
     t.float "amount"
     t.string "category"
+    t.date "date"
     t.index ["event_id"], name: "index_expenses_on_event_id"
     t.index ["user_id"], name: "index_expenses_on_user_id"
   end
