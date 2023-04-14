@@ -93,7 +93,11 @@
       <%= link_to "Add transaction", new_event_expense_path(@event), class: "link text-primary" %>
     </div>
   </div>
-  <% @event.expenses.each do |expense| %>
+  <% current_date = @event.expenses.order(date: :desc).first.date %>
+  <%= current_date %>
+  <% @event.expenses.order(date: :desc).each do |expense| %>
+    <%= expense.date if current_date != expense.date %>
+    <% current_date = expense.date %>
     <div class="transaction d-flex bd-highlight justify-content-start align-items-center mb-2">
       <div class="p-2 bd-highlight">
         <%= expense.category.emoji %>
@@ -101,10 +105,6 @@
       <div class="p-2 flex-grow-1 bd-highlight">
         <span>
           <%= expense.description %>
-        <br>
-          <p class="card-text">
-            <small class="text-muted">Date Placeholder</small>
-          </p>
         </span>
       </div>
       <div class="p-2 bd-highlight">

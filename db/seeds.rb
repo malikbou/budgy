@@ -100,7 +100,8 @@ expenses = []
     description: "Random",
     participants: "Malik",
     amount: rand(20..200),
-    category: Budget.all_columns.sample.last
+    category: Budget.all_columns.sample.last,
+    date: DateTime.now - (rand * 7)           # get random date in last 7 days
   }
 end
 expenses.each do |attributes|
