@@ -10,64 +10,18 @@
     </div>
   </div>
 
-  <div class="widget d-flex align-items-center mb-2 p-2">
-    <div class="me-auto align-items-start flex-column p-1">
-      <h3><%= "#{@event.currency} #{@event.expenses.sum(:amount).round}" %></h3>
-      <h6 class="text-muted"><%= @event.description %></h6>
-      <p>💵 Spending</p>
-    </div>
-
-    <div class="me-auto align-items-start flex-column p-1">
-      <h3><%= "#{@event.currency} #{@event.budget.round}" %></h3>
-      <h6 class="text-muted"><%= @event.description %></h6>
-      <p>⏰ Daily Allowance</p>
-    </div>
-  </div>
-
-  <div class="d-flex justify-content-between">
-      <div class="row">
-          <div class="col">
-            <p>💵 Spending</p>
-          </div>
-          <div class="col">
-            <p>💵 Spending</p>
-          </div>
+  <div class="widget p-2 mb-2">
+    <div class="row justify-content-between">
+      <div class="col-auto">
+        <h3>💵 Spending</h3>
+        <p><%= "#{@event.currency} #{@event.expenses.sum(:amount).round}" %></p>
+        <h6 class="text-muted"><%="#{@days_left} days left"%></h6>
       </div>
-  </div>
-
-  <div class="card mb-2">
-    <div class="d-flex bd-highlight justify-content-start align-items-center">
-      <div class="p-2 flex-grow-1 bd-highlight">
-        <h6>💵 Spending </h6>
-      </div>
-      <div class="p-2 bd-highlight">
-        <span>
-          <strong><%= "#{@event.currency} #{@event.expenses.sum(:amount) - @event.budget}" %></strong>
-        <br>
-          <p class="card-text">
-            <small class="text-muted"><%= "Over #{@event.currency} #{@event.budget}" %></small>
-          </p>
-        </span>
-      </div>
-    </div>
-  </div>
-
-  <div class="card mb-2">
-    <div class="d-flex bd-highlight justify-content-start align-items-center">
-      <div class="p-2 flex-grow-1 bd-highlight">
-        <h6>⏰ Daily Allowance </h6>
-        <p><small>per day</small></p>
-      </div>
-      <div class="p-2 bd-highlight">
-        <span>
-          <strong><%="#{@event.currency} #{@daily_budget}"%></strong>
-        <br>
-          <p class="card-text">
-            <small class="text-muted">
-            <%="#{@days_left} days left"%>
-            </small>
-          </p>
-        </span>
+      <div class="col-auto">
+        <h3>⏰ Budget</h3>
+        <p><%= "#{@event.currency} #{@event.budget.round}" %></p>
+        <h6 class="text-muted"><%="#{@event.currency} #{@daily_budget.round} per day"%></h6>
+        <strong></strong>
       </div>
     </div>
   </div>
@@ -118,28 +72,30 @@
       <%= link_to "Add transaction", new_event_expense_path(@event), class: "link text-primary" %>
     </div>
   </div>
-  <% current_date = @event.expenses.order(date: :desc).first.date %>
-  <p class="mb-2 "><strong><%= current_date.strftime('%A %d %B') %></strong></p>
-  <% @event.expenses.order(date: :desc).each do |expense| %>
-    <p class="mb-2 "><strong><%= expense.date.strftime('%A %d %B') if current_date != expense.date %></strong></p>
-    <% current_date = expense.date %>
-    <div class="transaction d-flex bd-highlight justify-content-start align-items-center mb-2">
-      <div class="p-2 bd-highlight">
-        <%= expense.category.emoji %>
+  <% if @event.expenses.exists? %>
+    <% current_date = @event.expenses.order(date: :desc).first.date %>
+    <p class="mb-2 "><strong><%= current_date.strftime('%A %d %B') %></strong></p>
+    <% @event.expenses.order(date: :desc).each do |expense| %>
+      <p class="mb-2 "><strong><%= expense.date.strftime('%A %d %B') if current_date != expense.date %></strong></p>
+      <% current_date = expense.date %>
+      <div class="transaction d-flex bd-highlight justify-content-start align-items-center mb-2">
+        <div class="p-2 bd-highlight">
+          <%= expense.category.emoji %>
+        </div>
+        <div class="p-2 flex-grow-1 bd-highlight">
+          <span>
+            <strong><%= expense.description %></strong>
+          </span>
+        </div>
+        <div class="p-2 bd-highlight">
+          <span class="badge bg-dark">
+            <%= "#{@event.currency} #{expense.amount.round}" %>
+          </span>
+            <%= link_to icon('fa-solid', 'pen-to-square'), edit_event_expense_path(@event, expense), class: "btn btn-sm" %>
+            <%= link_to icon('fa-solid', 'trash'), event_expense_path(@event, expense),
+              data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger btn-sm" %>
+        </div>
       </div>
-      <div class="p-2 flex-grow-1 bd-highlight">
-        <span>
-          <strong><%= expense.description %></strong>
-        </span>
-      </div>
-      <div class="p-2 bd-highlight">
-        <span class="badge bg-dark">
-          <%= "#{@event.currency} #{expense.amount.round}" %>
-          <%= link_to icon('fa-solid', 'pen-to-square'), edit_event_expense_path(@event, expense), class: "btn btn-sm", style: "color: #ffffff" %>
-          <%= link_to icon('fa-solid', 'trash'), event_expense_path(@event, expense),
-            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger btn-sm" %>
-        </span>
-      </div>
-    </div>
+    <% end %>
   <% end %>
 </div>

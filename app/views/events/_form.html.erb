@@ -6,8 +6,9 @@
     <%= f.input :people, placeholder: 'Malik & Andrea'%>
     <%= f.input :start_date %>
     <%= f.input :end_date %>
-    <%= f.input :budget, placeholder: 'Tulum' %>
+    <%= f.input :budget, placeholder: '10 racks' %>
     <%= f.input :currency, placeholder: 'Pesos' %>
+    <%= f.input :image_url, placeholder: 'https://unsplash.com/' %>
     <%= f.submit class: "btn btn-primary btn-sm btn-block" %>
     <% url_for(:back) == "http://127.0.0.1:3000/" ? path = root_path : path = event_path(event)%>
     <%= link_to "Back", path, class: "btn btn-secondary btn-sm" %>
